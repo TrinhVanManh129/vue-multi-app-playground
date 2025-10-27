@@ -17,7 +17,6 @@
       </div>
       <div v-if="loading" class="text-slate-600">Đang tải...</div>
       <div v-else-if="error" class="text-red-600">{{ error }}</div>
-
       <div v-else-if="data" class="rounded-xl border bg-white p-5 shadow-sm">
         <div class="flex items-start justify-between">
           <div>

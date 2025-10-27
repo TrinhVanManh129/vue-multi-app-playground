@@ -60,8 +60,6 @@
       <PetCard v-if="joke" icon="😄" title="Joke" class="mb-4">
         <p class="text-gray-700 whitespace-pre-line">{{ joke }}</p>
       </PetCard>
-
-
     </div>
   </div>
 </template>
