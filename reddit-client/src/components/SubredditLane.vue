@@ -9,10 +9,6 @@
       >
       &times;
       </button>
-      
-    <button @click="$emit('remove', subreddit)" class="w-7 h-7  bg-white/20 hover:bg-white/30 transition text-xl leading-none">
-      &times;
-    </button>
     </div>
     <div class="flex-1 overflow-y-auto p-4">
       <div v-if="loading" class="flex justify-center items-center py-12">
