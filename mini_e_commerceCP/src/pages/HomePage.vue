@@ -95,7 +95,6 @@
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
         </svg>
       </button>
-      
       <div class="flex items-center gap-2">
         <button
           v-for="p in visiblePages"
@@ -124,25 +123,20 @@
 
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue'
+import { storeToRefs } from 'pinia'
 import { useProductsStore } from '@/stores/products'
 import ProductCard from '@/components/ProductCard.vue'
 
 const store = useProductsStore()
+const { items, total, limit, loading, categories } = storeToRefs(store)
 const search = ref('')
 const category = ref('')
 const sort = ref('')
-
-const items = store.items
-const total = store.total
-const limit = store.limit
-const loading = store.loading
-const categories = store.categories
-const page = computed(() => Math.floor(store.skip / store.limit) + 1)
-const maxPage = computed(() => Math.ceil(store.total / store.limit))
-
+const page = Math.floor(store.skip / store.limit) + 1
+const maxPage = Math.ceil(store.total / store.limit)
 const visiblePages = computed(() => {
-  const current = page.value
-  const max = maxPage.value
+  const current = page
+  const max = maxPage
   const pages = []
 
   let start = Math.max(1, current - 2)
