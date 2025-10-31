@@ -133,12 +133,12 @@ const category = ref('')
 const sort = ref('')
 
 const items = store.items
-const total =store.total
-const limit =store.limit
-const loading =store.loading
+const total = store.total
+const limit = store.limit
+const loading = store.loading
 const categories = store.categories
-const page = Math.floor(store.skip / store.limit) + 1
-const maxPage = Math.ceil(total / limit)
+const page = computed(() => Math.floor(store.skip / store.limit) + 1)
+const maxPage = computed(() => Math.ceil(store.total / store.limit))
 
 const visiblePages = computed(() => {
   const current = page.value
