@@ -60,7 +60,7 @@
         </button>
       </div>
     </div>
-    <div v-if="loading" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+    <div v-if="loading || initialLoad" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
       <div v-for="i in 8" :key="i" class="bg-white rounded-xl shadow-md overflow-hidden">
         <div class="aspect-square bg-gray-200 animate-pulse"></div>
         <div class="p-4 space-y-3">
@@ -132,11 +132,12 @@ const { items, total, limit, loading, categories } = storeToRefs(store)
 const search = ref('')
 const category = ref('')
 const sort = ref('')
-const page = Math.floor(store.skip / store.limit) + 1
-const maxPage = Math.ceil(store.total / store.limit)
+const initialLoad = ref(true)
+const page = computed(() => Math.floor(store.skip / store.limit) + 1)
+const maxPage = computed(() => Math.ceil(store.total / store.limit))
 const visiblePages = computed(() => {
-  const current = page
-  const max = maxPage
+  const current = page.value
+  const max = maxPage.value
   const pages = []
 
   let start = Math.max(1, current - 2)
@@ -198,5 +199,6 @@ watch(category, applyCategory)
 onMounted(async () => {
   await store.fetchCategories()
   await store.fetchList()
+  initialLoad.value = false
 })
 </script>
